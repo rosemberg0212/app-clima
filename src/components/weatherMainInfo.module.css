@@ -1,0 +1,36 @@
+.content{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.infoContainer{
+    width: 612px;
+    height: 303px;
+    background-image: url('../img/Cloudy\ 1.png');
+    margin: 0 10px;
+    border-radius: 8px;
+    padding: 10px;
+    color: #ffffff;
+}
+
+.time_now {
+    margin-top: 8px;
+}
+
+.info_grados{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+
+.info_grados h3{
+    font-size: 3.5rem;
+}
+
+.info_general{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 36px;
+}

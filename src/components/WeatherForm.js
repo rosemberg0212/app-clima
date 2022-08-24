@@ -19,8 +19,8 @@ const WeatherForm = ({ onChangeCity }) => {
 
     return (
         <form onSubmit={onSubmit} className={styles.container}>
-        <h2>Ingrese País o Ciudad a consultar clima</h2>
-            <input type='text' onChange={onChange} className={styles.input}/>
+            <h2>Ingrese País o Ciudad a consultar clima</h2>
+            <input type='text' onChange={onChange} className={styles.input} />
         </form>
     )
 }

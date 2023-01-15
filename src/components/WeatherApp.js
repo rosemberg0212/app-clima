@@ -1,39 +1,48 @@
 import React, { useEffect, useState } from 'react'
-import WeatherForm from './WeatherForm'
 import WeatherMainInfo from './WeatherMainInfo'
 import styles from './WeatherApp.module.css'
 
 const WeatherApp = () => {
-    const [weather, setweather] = useState(null)
+    const [search, setsearch] = useState('Medellin')
+    const [values, setvalues] = useState('')
 
-    useEffect(() => {
-        loadInfo()
-    }, [])
+    const URL = `https://api.openweathermap.org/data/2.5/weather?q=${search}&lang=es&units=metric&appid=${process.env.REACT_APP_KEY}`
 
-    useEffect(() => {
-        document.title = `Weather | ${weather?.location.name ?? ''}`
-    }, [weather])
-
-    const loadInfo = async (city = 'Cartagena') => {
-        try {
-            const res = await fetch(`${process.env.REACT_APP_URL}&key=${process.env.REACT_APP_KEY}&q=${city}`);
-            const json = await res.json()
-            console.log(json)
-
-            setweather(json)
-        } catch (error) { 
+    const getData = async ()=>{
+        const res = await fetch(URL);
+        const data = await res.json();
+        console.log(data)
+        if(data.cod >= 400){
+            setvalues(false)
+        }else{
+            setvalues(data)
         }
     }
-
-    const handleChangeCity = (city) => {
-        setweather(null);
-        loadInfo(city);
+    
+    const onChange = (e)=>{  
+        if(e.key === 'Enter'){
+            console.log(e.target.value)
+            setsearch(e.target.value)
+        }
+        
     }
+
+    useEffect(() => {
+      getData()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [search])
+    
 
     return (
         <div className={styles.weatherContainer}>
-            <WeatherForm onChangeCity={handleChangeCity} />
-            <WeatherMainInfo weather={weather}/>
+        <h2>Ingrese Ciudad a Consultar Clima</h2>
+            <input 
+                onKeyDown={onChange}
+                type='text'
+                autoFocus
+                className={styles.input}
+            />
+            <WeatherMainInfo values={values}/>
         </div>
     )
 }

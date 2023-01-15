@@ -1,6 +1,5 @@
 import WeatherApp from "./components/WeatherApp";
 
-
 function App() {
   return (
     <>
